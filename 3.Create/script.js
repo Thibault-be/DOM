@@ -18,7 +18,14 @@ function randomColor(){
   let G = Math.floor(Math.random() * (max - min + 1)) + min;
   
   let color = `rgb(${R}, ${G},${B})`
-  return color;
+  
+  //  // calculate the relative luminance. > 0.5 is light; <0.5 is dark
+  luminance = 0.2126 * (R / 255) + 0.7152 * (G / 255) + 0.0722 * (B / 255)
+  console.log(`L is ${luminance}`)
+
+  return colorAndLuminance = [color, luminance]
+
+  
 };
 
 
@@ -31,8 +38,15 @@ for (let i = 0; i < students.length; i++){
   const pLearner = document.createElement("p");
 
   let backgroundColor = randomColor()
+
   console.log(backgroundColor);
-  pLearner.style.backgroundColor = backgroundColor;
+  pLearner.style.backgroundColor = backgroundColor[0];
+
+  if (backgroundColor[1] >=0.5){
+    pLearner.style.color = "black"
+  }else{
+    pLearner.style.color = "white"
+  }
 
   pLearner.textContent = name;
   newSection.appendChild(pLearner);
@@ -40,9 +54,5 @@ for (let i = 0; i < students.length; i++){
 
 article = document.querySelector("article");
 article.appendChild(newSection);
-
-
-
-// section -> paragraph (name)
 
 
