@@ -29,7 +29,7 @@ let randomColor = () =>{
 
   let randomColor = `rgb(${R},${G},${B})`;
   return randomColor;
-}
+};
 
 const deleteLog = () => {
   const ul = document.querySelector("ul");
@@ -39,8 +39,8 @@ const deleteLog = () => {
     ul.removeChild(ul.firstElementChild); 
     numberOfChildren = ul.children.length;
     console.log(numberOfChildren);
-  }
-}
+  };
+};
 
 const newBackgroundColor = () => {
   let bgColor = randomColor();
@@ -56,9 +56,14 @@ const newBackgroundColor = () => {
 }
 
 const eraseSquares = () => {
-  const body = document.querySelector("body");
+  const generatedSquares = document.querySelector(".displayedsquare-wrapper");
+  let numberOfSquares = generatedSquares.children.length;
 
-}
+  while (numberOfSquares > 0){
+    generatedSquares.removeChild(generatedSquares.firstChild);
+    numberOfSquares = generatedSquares.children.length;
+  }
+};
 
 //end Thibault created functions
 
@@ -69,8 +74,8 @@ const getElapsedTime = () => {
 }
 
 const clickOnSquare = (e) => {
-  console.log(e.target.classList[1])
-  console.log(getElapsedTime())
+  //console.log(e.target.classList[1])
+  //console.log(getElapsedTime())
   const color = e.target.classList[1];
   const newDiv = document.createElement("div");
   newDiv.setAttribute("class", `displayedsquare ${color}`);
