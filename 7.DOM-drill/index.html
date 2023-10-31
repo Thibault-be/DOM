@@ -25,4 +25,42 @@
   </ul>
 </body>
 
+
+<script>
+
+  const ul = document.querySelector("ul");
+  const childNodes = ul.childNodes;
+
+
+  for (let i = 0; i < childNodes.length ; i++){
+    if(childNodes[i].nodeName === "LI"){
+      //console.log(childNodes[i]);
+    };
+    if(childNodes[i].textContent === "Fast and Furious"){
+      ul.childNodes[i].setAttribute("class", "important");
+      ul.insertBefore(childNodes[i], ul.firstElementChild); 
+    };
+  };
+
+    const listItem = document.querySelectorAll("li");
+    
+    listItem.forEach(item => {
+      item.addEventListener("click", (event)=> {
+        let film = event.target.textContent;
+        if(film === "Fast and Furious"){
+          alert("`The most important franchise ever, the story of DOM(inic) Toretto's family. It's not about car, it's about family.`")
+        }else{
+          alert(film);
+        };        
+      });
+    });
+
+    //start at remove duplicates
+
+
+
+
+
+</script>
+
 </html>
