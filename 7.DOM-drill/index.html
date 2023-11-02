@@ -28,7 +28,7 @@
 
 <script>
 
-  const ul = document.querySelector("ul");
+  let ul = document.querySelector("ul");
   const childNodes = ul.childNodes;
 
 
@@ -55,7 +55,42 @@
       });
     });
 
-    //start at remove duplicates
+  
+ 
+  //create empty array to capture textcontent of list items
+  let textContentArray = [];
+  listItem.forEach(item =>{
+    textContentArray.push(item.textContent); //push each item into the text array
+  });
+
+  let uniqueTextArray = []; //create an array to capture unique textContent elements
+  let uniqueElementsArray = []; //create another array to store corresponding <li> elements
+  for (let i = 0; i < textContentArray.length - 1; i++){    //loop over the textContentArray (containing all texts from all li elements)
+    if (!uniqueTextArray.includes(textContentArray[i])){  //if the uniqueText array does not contain this text 
+      uniqueTextArray.push(textContentArray[i]);          //add the textContent to the uniqueText array
+      uniqueElementsArray.push(listItem[i]);            //also add the actual <li> element node to unique elements array
+    }
+  }
+
+  //remove all items from the ul selector
+  const removeLength = ul.children.length;
+  for (let i = 0; i < removeLength; i++){
+    ul.removeChild(ul.firstElementChild);
+  }
+  
+  //append all (unique) elements from the unique elements array
+  uniqueElementsArray.forEach(element => {
+    ul.appendChild(element);
+  })
+
+
+  
+
+
+
+ 
+
+
 
 
 
