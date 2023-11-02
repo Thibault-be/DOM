@@ -489,16 +489,21 @@ main.insertBefore(filterInput,main.firstElementChild);
 let secondFilterList 
 //this eventListener creates the second dropdown filter list when you select an option in the first list
 filterInput.addEventListener('change', (event)=> {
-  let firstFilterValue =filterInput.value;
-  secondFilterList = document.createElement("select");
-  secondFilterList.setAttribute("class", "second-filter");
+  let firstFilterValue = filterInput.value;
+
+  if(!document.querySelector(".second-filter")){
+    secondFilterList = document.createElement("select");
+    secondFilterList.setAttribute("class", "second-filter");
+
+  }else{
+    secondFilterList = document.querySelector(".second-filter")
+    while(secondFilterList.firstChild){
+      secondFilterList.remove(secondFilterList.lastChild);
+    };
+  }
   createFilterOptions(firstFilterValue);
-  main.insertBefore(secondFilterList, main.children[1]);  
-  console.log(secondFilterList.value);
-
+  main.insertBefore(secondFilterList, main.children[1]);
   secondFilterEvent(firstFilterValue, secondFilterList);
-
-
 });
 
 
@@ -506,6 +511,7 @@ filterInput.addEventListener('change', (event)=> {
 function createFilterOptions(firstFilterValue){
 
   let selections = []
+  console.log(selections)
   //loop over every item in the menu array and check if the value is in the new array
   menu.forEach(item =>{
     if(!selections.includes(item[firstFilterValue])){
