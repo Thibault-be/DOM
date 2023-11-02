@@ -113,36 +113,55 @@ function randomiseArray(array){
     }
   })
 
-
-
-  
-//   - **(*)** Modify the previous function so that when you press the letter `d` of your keyboard, 
-//   the `Fast and Furious` element gets [cloned](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)
-// - Create a new `<div>` before the list, using [createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) 
-//    and [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore)
-// - Using `createElement`, create a [`<select>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) into the previously created 
-//  `<div>`, with two `<option>`s in it: "important franchises" and "normal franchises"
-// - Add an eventListener to the `<select>`, on `change`, if the option "important franchise" is chosen, only display items of the list 
-//  that have the class `.important`. (hint: you can toggle visibility using `element.style.visibility = 'hidden'`)
-
-body.addEventListener("keyup", (event) => {
-  if(event.code = 'KeyD'){
+  body.addEventListener("keyup", (event) => {
+  if(event.code === 'KeyD'){
     const newDiv = document.createElement("div");
     const furiousNode = document.querySelector(".important");
     const furiousClone = furiousNode.cloneNode(true);
-    //console.log(furiousNode);
-    //console.log(furiousClone);
 
     newDiv.appendChild(furiousClone);
 
-    body.insertBefore(newDiv, body.children[1d]);
-  
-  
+    body.insertBefore(newDiv, body.children[1]);
   }
-
-
-
 })
+
+
+    const select = document.createElement("select");
+    const option1 = document.createElement("option");
+    const option2 = document.createElement("option");
+    option2.textContent = "important"
+    
+    option1.textContent ="trivial";
+
+    select.appendChild(option1);
+    select.appendChild(option2);
+    body.appendChild(select);
+
+
+  select.addEventListener("change", (event)=> {
+
+    if(select.selectedIndex === 1){
+  
+      listItem.forEach(item =>{
+        if (item.className === ""){
+          item.style.visibility = "hidden"
+        }else{
+          item.style.visibility = "visible"
+        }
+      });
+    }else if (select.selectedIndex === 0){
+      listItem.forEach(item => {
+        if(item.className == "important"){
+          item.style.visibility = "hidden";
+        }else{
+          item.style.visibility = "visible";
+        };
+      });
+    };
+  });
+
+  
+
 
 
 
