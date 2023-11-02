@@ -28,6 +28,18 @@
 
 <script>
 
+
+function randomiseArray(array){
+    for (let i = array.length -1; i > 1; i--) {
+      let j = Math.floor(Math.random() * (i))+1;
+      let k = array[i];
+      array[i] = array[j];
+      array[j] = k;
+  }
+  return array; 
+
+  }
+
   let ul = document.querySelector("ul");
   const childNodes = ul.childNodes;
 
@@ -55,7 +67,6 @@
       });
     });
 
-  
  
   //create empty array to capture textcontent of list items
   let textContentArray = [];
@@ -84,7 +95,54 @@
   })
 
 
+  const body = document.querySelector("body");
+  body.addEventListener("keyup", (event)=>{
+    if(event.code === "KeyR"){      
+      let randomisedArray = randomiseArray(uniqueElementsArray);
+        
+      //remove all items from the ul selector
+      const removeLength = ul.children.length;
+      for (let i = 0; i < removeLength; i++){
+        ul.removeChild(ul.firstElementChild);
+      }
+
+      //append all (unique) elements from the unique elements array
+      uniqueElementsArray.forEach(element => {
+        ul.appendChild(element);
+      })
+    }
+  })
+
+
+
   
+//   - **(*)** Modify the previous function so that when you press the letter `d` of your keyboard, 
+//   the `Fast and Furious` element gets [cloned](https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode)
+// - Create a new `<div>` before the list, using [createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) 
+//    and [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore)
+// - Using `createElement`, create a [`<select>` tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select) into the previously created 
+//  `<div>`, with two `<option>`s in it: "important franchises" and "normal franchises"
+// - Add an eventListener to the `<select>`, on `change`, if the option "important franchise" is chosen, only display items of the list 
+//  that have the class `.important`. (hint: you can toggle visibility using `element.style.visibility = 'hidden'`)
+
+body.addEventListener("keyup", (event) => {
+  if(event.code = 'KeyD'){
+    const newDiv = document.createElement("div");
+    const furiousNode = document.querySelector(".important");
+    const furiousClone = furiousNode.cloneNode(true);
+    //console.log(furiousNode);
+    //console.log(furiousClone);
+
+    newDiv.appendChild(furiousClone);
+
+    body.insertBefore(newDiv, body.children[1d]);
+  
+  
+  }
+
+
+
+})
 
 
 
