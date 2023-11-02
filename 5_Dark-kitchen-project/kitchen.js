@@ -361,7 +361,64 @@ const menu = [
 
 //const arrayLength = menu.length;
 
+
 const main = document.querySelector("main");
+const cardsContainer = document.createElement("div");
+cardsContainer.setAttribute("class", "cards-container")
+
+//generate the cards for all items in menu
+function createMenuCard(item){
+  let dish = item["dish"];
+  let description = item["description"];
+  let country = item["country"];
+  let type = item["type"];
+  let vegetarian = item["vegetarian"];
+  let calories = `${item["calories"]} kCal`;
+  let price = `€ ${item["price"]}`;
+  let image = item["image"];
+  
+  let card = document.createElement("div");
+  card.setAttribute("class", "card")
+
+
+  let imgContainer = document.createElement("div");
+  imgContainer.setAttribute("class", "image")
+  let imageElement = document.createElement("img");
+  imageElement.setAttribute("src", image)
+  imgContainer.appendChild(imageElement);
+
+  let dishElement = document.createElement("h2");
+  dishElement.textContent = dish;
+
+  let descriptionElement = document.createElement("p");
+  descriptionElement.setAttribute("class", "description");
+  descriptionElement.textContent = description
+
+  let countryElement = document.createElement("p");
+  countryElement.textContent = country;
+
+  let typeElement = document.createElement("p");
+  typeElement.textContent = type;
+
+  let vegetarianElement = document.createElement("p");
+  vegetarianElement.textContent = vegetarian;
+
+  let caloriesElement = document.createElement("p");
+  caloriesElement.textContent = calories;
+
+  let priceElement = document.createElement("p");
+  priceElement.textContent = price;
+
+  let cardNodes = [imgContainer, dishElement, descriptionElement, countryElement,
+          typeElement, vegetarianElement, caloriesElement, priceElement];
+  
+  cardNodes.forEach(node =>{
+    card.appendChild(node);
+  })
+
+  console.log(card);
+  return card;
+}
 
 menu.forEach(menuItem => {
   let dish = menuItem["dish"];
@@ -412,109 +469,76 @@ menu.forEach(menuItem => {
     card.appendChild(node);
   })
 
-  main.appendChild(card);
+  cardsContainer.appendChild(card);
+
+});
+main.appendChild(cardsContainer);
+
+
+//create the first drop down to filter
+const filterInput = document.createElement("select")
+const filterOptions = ["", "type", "country", "vegetarian", "calories", "price"];
+filterOptions.forEach(option =>{
+  let newDiv = document.createElement("option");
+  newDiv.setAttribute("class", `filter-option ${option}`);
+  newDiv.textContent = option;
+  filterInput.appendChild(newDiv)
+});
+main.insertBefore(filterInput,main.firstElementChild);
+
+let secondFilterList 
+//this eventListener creates the second dropdown filter list when you select an option in the first list
+filterInput.addEventListener('change', (event)=> {
+  let firstFilterValue =filterInput.value;
+  secondFilterList = document.createElement("select");
+  secondFilterList.setAttribute("class", "second-filter");
+  createFilterOptions(firstFilterValue);
+  main.insertBefore(secondFilterList, main.children[1]);  
+  console.log(secondFilterList.value);
+
+  secondFilterEvent(firstFilterValue, secondFilterList);
+
 
 });
 
-// //Create the cards
-// const arrayLength = menu.length;
 
-// for(let i = 0; i < arrayLength; i++){
+//this function fetches the items for the second dropdown filterlist
+function createFilterOptions(firstFilterValue){
 
-//   let card = document.createElement("div");
-//   card.setAttribute("class", "card")
-  
-//   let imgContainer = document.createElement("div");
-//   imgContainer.setAttribute("class", "game-image")
-//   let image = document.createElement("img");
-//   imgContainer.appendChild(image);
+  let selections = []
+  //loop over every item in the menu array and check if the value is in the new array
+  menu.forEach(item =>{
+    if(!selections.includes(item[firstFilterValue])){
+      selections.push(item[firstFilterValue]);
+    };
+  });
+  selections.sort() // put in alphabetical order;
 
-//   let contentContainer = document.createElement("div");
-//   contentContainer.setAttribute("class", "content-container")
-  
-//   let titleContainer = document.createElement("div");
-//   titleContainer.setAttribute("class", "title-container");
-//   let title = document.createElement("h2");
-//   title.setAttribute("class", "title");
-//   titleContainer.appendChild(title);
-
-//   let releaseContainer = document.createElement("div");
-//   releaseContainer.setAttribute("class", "info");
-//   let release = document.createElement("p");
-//   release.setAttribute("class","release");
-//   let releaseTag = document.createElement("p")
-//   releaseTag.setAttribute("class", "tag");
-//   releaseTag.textContent = "Release: "
-//   releaseContainer.appendChild(releaseTag);
-//   releaseContainer.appendChild(release);
-
-//   let genreContainer = document.createElement("div");
-//   genreContainer.setAttribute("class", "info");
-//   let genre = document.createElement("p");
-//   genre.setAttribute("class","genre");
-//   let genreTag = document.createElement("p")
-//   genreTag.setAttribute("class", "tag");
-//   genreTag.textContent = "Genre: "
-//   genreContainer.appendChild(genreTag);
-//   genreContainer.appendChild(genre);
-
-//   let platformsContainer = document.createElement("div");
-//   platformsContainer.setAttribute("class", "info");
-//   let platforms = document.createElement("p");
-//   platforms.setAttribute("class","platforms");
-//   let platformsTag = document.createElement("p");
-//   platformsTag.setAttribute("class", "tag");
-//   platformsTag.textContent = "Platforms: "
-//   platformsContainer.appendChild(platformsTag);
-//   platformsContainer.appendChild(platforms);
-
-//   let publisherContainer = document.createElement("div");
-//   publisherContainer.setAttribute("class", "info");
-//   let publisher = document.createElement("p");
-//   publisher.setAttribute("class","publisher");
-//   let publisherTag = document.createElement("p");
-//   publisherTag.setAttribute("class", "tag");
-//   publisherTag.textContent = "Publisher: "
-//   publisherContainer.appendChild(publisherTag);
-//   publisherContainer.appendChild(publisher);
-
-//   let developerContainer = document.createElement("div");
-//   developerContainer.setAttribute("class", "info");
-//   let developer = document.createElement("p");
-//   developer.setAttribute("class","developer");
-//   let developerTag = document.createElement("p");
-//   developerTag.setAttribute("class", "tag");
-//   developerTag.textContent = "Developer: "
-//   developerContainer.appendChild(developerTag);
-//   developerContainer.appendChild(developer);
-  
-//   let info = [titleContainer, releaseContainer, genreContainer,
-//        platformsContainer, publisherContainer, developerContainer];
-
-//   for(let j = 0; j< info.length; j++){
-//     contentContainer.appendChild(info[j]);
-//   }
-
-//   card.appendChild(imgContainer);
-//   card.appendChild(contentContainer);
+  let firstBlankOption = document.createElement("option")
+  secondFilterList.appendChild(firstBlankOption);
 
 
-//   //fill out the content
+  selections.forEach(selection => {
+    let optionElement = document.createElement("option");
+    optionElement.textContent = selection;
+    secondFilterList.appendChild(optionElement);
+  })
+};
 
-//   console.log(videogames[i])
+//make sure only the cards with that filter option are visible
+function secondFilterEvent(string, object){
+  object.addEventListener('change', (event) =>{
 
-//   //need to dynamically obtain "release" etc. so we can flex space between
+    let allCards = document.querySelector(".cards-container");
+    while(allCards.firstChild){
+      allCards.removeChild(allCards.lastChild);
+    }
 
-//   title.textContent = videogames[i]["title"];
-//   release.textContent =  videogames[i]["release"];
-//   genre.textContent =  videogames[i]["genre"];
-//   platforms.textContent = videogames[i]["platforms"];
-//   publisher.textContent =  videogames[i]["publisher"];
-//   developer.textContent =  videogames[i]["developer"];
-//   image.setAttribute("src",videogames[i]["image"]);
-
-  
-//   let main = document.querySelector("main");
-//   main.appendChild(card);
-
-// };
+    menu.forEach(item =>{
+      if((item[string] === object.value)){
+        let card = createMenuCard(item);
+        cardsContainer.appendChild(card);
+      }
+    })
+  })
+}

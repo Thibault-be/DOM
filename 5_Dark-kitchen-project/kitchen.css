@@ -28,7 +28,7 @@ h1{
   padding-right: 200px;
 }
 
-main{
+.cards-container{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 350px));
   gap: 15px;
