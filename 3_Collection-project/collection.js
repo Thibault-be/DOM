@@ -12,6 +12,7 @@ const videogames = [
     genre: ["Hack 'n' Slash", "Action"],
     developer: "Capcom",
     publisher: "Capcom",
+    image: "./img/devilMayCry.jpg",
   },
   {
     title: "God of War",
@@ -19,7 +20,8 @@ const videogames = [
     release: 2005,
     genre: ["Action / Adventure"],
     developer: "Santa Monica Studio",
-    publisher: "Sony Computer Entertainment",
+    publisher: "Sony",
+    image: "./img/godofwar.webp",
   },
   {
     title: "Killzone",
@@ -27,7 +29,8 @@ const videogames = [
     release: 2004,
     genre: ["First-Person Shooter"],
     developer: "Guerrilla Games",
-    publisher: "Sony Computer Entertainment",
+    publisher: "Sony",
+    image: "./img/killzone.jpg",
   },
   {
     title: "Socom 2",
@@ -35,7 +38,8 @@ const videogames = [
     release: 2003,
     genre: ["Tactical Shooter"],
     developer: "Zipper Interactive",
-    publisher: "Sony Computer Entertainment",
+    publisher: "Sony",
+    image: "./img/socom2.jpg",
   },
   {
     title: "Horizon Zero Dawn",
@@ -43,15 +47,17 @@ const videogames = [
     release: 2017,
     genre: ["Action / RPG"],
     developer: "Guerrilla Games",
-    publisher: "Sony Interactive Entertainment",
+    publisher: "Sony",
+    image: "./img/horizonzerodawn.jpg",
   },
   {
     title: "Ratchet and Clank",
     platforms: ["PS2", "PS3", "PS4", "PS5"],
     release: 2002,
-    genre: ["Platformer", "Action / Adventure"],
+    genre: ["Platformer"],
     developer: "Insomniac Games",
-    publisher: "Sony Computer Entertainment",
+    publisher: "Sony ",
+    image: "./img/ratchetandclank.jpg",
   },
   {
     title: "Call of Duty: Modern Warfare",
@@ -60,6 +66,7 @@ const videogames = [
     genre: ["First-Person Shooter"],
     developer: "Infinity Ward",
     publisher: "Activision",
+    image: "./img/callofdutymodernwarfare.jpg",
   },
   {
     title: "SSX: Tricky",
@@ -68,22 +75,25 @@ const videogames = [
     genre: ["Sports (Snowboarding)"],
     developer: "EA Canada",
     publisher: "EA Sports BIG",
+    image: "./img/ssxtricky.jpg",
   },
   {
     title: "The Last of Us",
     platforms: ["PS3", "PS4"],
     release: 2013,
-    genre: ["Action / Adventure", "Survival Horror"],
+    genre: ["Action", "Survival Horror"],
     developer: "Naughty Dog",
-    publisher: "Sony Computer Entertainment",
+    publisher: "Sony",
+    image: "./img/thelastofus.jpg",
   },
   {
     title: "Alan Wake",
     platforms: ["Xbox 360", "PC"],
     release: 2010,
-    genre: ["Action / Adventure", "Survival Horror"],
+    genre: ["Action", "Survival Horror"],
     developer: "Remedy Entertainment",
     publisher: "Microsoft Game Studios",
+    image: "./img/alanwake.jpg",
   },
 ];
 
@@ -204,6 +214,7 @@ for(let i = 0; i < arrayLength; i++){
   platforms.textContent = videogames[i]["platforms"];
   publisher.textContent =  videogames[i]["publisher"];
   developer.textContent =  videogames[i]["developer"];
+  image.setAttribute("src",videogames[i]["image"]);
 
   
   let main = document.querySelector("main");
