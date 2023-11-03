@@ -19,7 +19,6 @@ age.addEventListener("keyup", (event) =>{
 
 const pwd = document.querySelector("#pwd");
 pwd.addEventListener("keyup", (event) => {
-  console.log(pwd.value.length);
   if(pwd.value.length < 6){
     pwd.style.color = "red"
   }else{

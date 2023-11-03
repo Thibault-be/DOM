@@ -1,0 +1,85 @@
+main {
+  border: 2px solid;
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(5, 100px);
+
+  grid-template-areas:
+  "C C C divide"
+  "seven eight nine multiply"
+  "four five six minus"
+  "one two three plus"
+  "neg zero comma equal";
+}
+
+.number1{
+  grid-area: one;
+}
+
+.number2{
+  grid-area: two;
+}
+
+.number3{
+  grid-area: three;
+}
+
+.number4{
+  grid-area: four;
+}
+
+.number5{
+  grid-area: five;
+}
+
+.number6{
+  grid-area: six;
+}
+
+.number7{
+  grid-area: seven;
+}
+
+.number8{
+  grid-area: eight;
+}
+
+.number9{
+  grid-area: nine;
+}
+
+.number0{
+  grid-area: zero;
+}
+
+.numberC{
+  grid-area: C;
+}
+
+.numbermultiply{
+  grid-area: multiply;
+}
+
+.numberdivide{
+  grid-area: divide;
+}
+
+.numberminus{
+  grid-area: minus;
+}
+
+.numberplus{
+  grid-area: plus;
+}
+
+.numberequal{
+  grid-area: equal;
+}
+
+.numberneg{
+  grid-area: neg;
+}
+
+.numbercomma{
+  grid-area:comma;
+}
