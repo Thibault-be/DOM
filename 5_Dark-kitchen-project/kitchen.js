@@ -508,14 +508,18 @@ function secondFilterEvent(string, object){
   })
 }
 
-//add eventListener to the add buttons
-let buyArray = []
+//add eventListener to the add buttons to add items to shopping cart
 const addButton = () => {
   const buyButtons = document.querySelectorAll(".buy");
   
   buyButtons.forEach(buyButton => {
     buyButton.addEventListener("click", () =>{
-      ObtainDishAndPrice(buyButton)
+      let dishAndPrice = ObtainDishAndPrice(buyButton);
+      console.log("Here", dishAndPrice)
+      let dishAndPriceDiv = document.createElement("div");
+      dishAndPriceDiv.textContent = `${dishAndPrice[0]} - ${dishAndPrice[1]}`;
+      let shoppingCart = document.querySelector(".shopping");
+      shoppingCart.appendChild(dishAndPriceDiv);
     })
   })
 }
