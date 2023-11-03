@@ -429,11 +429,14 @@ function createMenuCard(item){
 }
 
 //create the complete menu
+function completeMenu(){
 menu.forEach(menuItem => {
   let test = createMenuCard(menuItem);
   cardsContainer.appendChild(test)
   main.appendChild(cardsContainer);
 });
+}
+completeMenu();
 
 //create the first drop down to filter
 const filterInput = document.createElement("select")
@@ -451,6 +454,10 @@ let secondFilterList
 filterInput.addEventListener('change', (event)=> {
   let firstFilterValue = filterInput.value;
 
+  if (firstFilterValue === ""){
+    completeMenu()
+  }
+
   if(!document.querySelector(".second-filter")){
     secondFilterList = document.createElement("select");
     secondFilterList.setAttribute("class", "second-filter");
@@ -464,6 +471,7 @@ filterInput.addEventListener('change', (event)=> {
   createFilterOptions(firstFilterValue);
   main.insertBefore(secondFilterList, main.children[1]);
   secondFilterEvent(firstFilterValue, secondFilterList);
+  addButton()
 });
 
 
@@ -505,6 +513,7 @@ function secondFilterEvent(string, object){
         cardsContainer.appendChild(card);
       }
     })
+    addButton();
   })
 }
 
@@ -540,5 +549,5 @@ const ObtainDishAndPrice = (button) => {
   const dishPriceArray = [itemPrice, dishName];
   return dishPriceArray
 
-}
+};
 
