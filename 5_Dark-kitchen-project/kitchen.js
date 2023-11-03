@@ -355,6 +355,7 @@ const menu = [
         <p class="platforms">PS2, PS3, Android</p>
         <p class="publisher">Capcom</p>
         <p class="developer">Capcom</p>
+        <button>add<button>
       </div>
     </div>
 */
@@ -388,6 +389,7 @@ function createMenuCard(item){
   imgContainer.appendChild(imageElement);
 
   let dishElement = document.createElement("h2");
+  dishElement.setAttribute("class", "dish")
   dishElement.textContent = dish;
 
   let descriptionElement = document.createElement("p");
@@ -407,73 +409,31 @@ function createMenuCard(item){
   caloriesElement.textContent = calories;
 
   let priceElement = document.createElement("p");
+  priceElement.setAttribute("class", "price")
   priceElement.textContent = price;
 
+  let addButton = document.createElement("button");
+  addButton.setAttribute("class", "buy");
+  let id = `${dish}Btn`;
+  addButton.setAttribute("id", id)
+  addButton.textContent = "add";
+
   let cardNodes = [imgContainer, dishElement, descriptionElement, countryElement,
-          typeElement, vegetarianElement, caloriesElement, priceElement];
+          typeElement, vegetarianElement, caloriesElement, priceElement, addButton];
   
   cardNodes.forEach(node =>{
     card.appendChild(node);
   })
 
-  console.log(card);
   return card;
 }
 
+//create the complete menu
 menu.forEach(menuItem => {
-  let dish = menuItem["dish"];
-  let description = menuItem["description"];
-  let country = menuItem["country"];
-  let type = menuItem["type"];
-  let vegetarian = menuItem["vegetarian"];
-  let calories = `${menuItem["calories"]} kCal`;
-  let price = `€ ${menuItem["price"]}`;
-  let image = menuItem["image"];
-  
-  let card = document.createElement("div");
-  card.setAttribute("class", "card")
-
-
-  let imgContainer = document.createElement("div");
-  imgContainer.setAttribute("class", "image")
-  let imageElement = document.createElement("img");
-  imageElement.setAttribute("src", image)
-  imgContainer.appendChild(imageElement);
-
-  let dishElement = document.createElement("h2");
-  dishElement.textContent = dish;
-
-  let descriptionElement = document.createElement("p");
-  descriptionElement.setAttribute("class", "description");
-  descriptionElement.textContent = description
-
-  let countryElement = document.createElement("p");
-  countryElement.textContent = country;
-
-  let typeElement = document.createElement("p");
-  typeElement.textContent = type;
-
-  let vegetarianElement = document.createElement("p");
-  vegetarianElement.textContent = vegetarian;
-
-  let caloriesElement = document.createElement("p");
-  caloriesElement.textContent = calories;
-
-  let priceElement = document.createElement("p");
-  priceElement.textContent = price;
-
-  let cardNodes = [imgContainer, dishElement, descriptionElement, countryElement,
-          typeElement, vegetarianElement, caloriesElement, priceElement];
-  
-  cardNodes.forEach(node =>{
-    card.appendChild(node);
-  })
-
-  cardsContainer.appendChild(card);
-
+  let test = createMenuCard(menuItem);
+  cardsContainer.appendChild(test)
+  main.appendChild(cardsContainer);
 });
-main.appendChild(cardsContainer);
-
 
 //create the first drop down to filter
 const filterInput = document.createElement("select")
@@ -511,7 +471,6 @@ filterInput.addEventListener('change', (event)=> {
 function createFilterOptions(firstFilterValue){
 
   let selections = []
-  console.log(selections)
   //loop over every item in the menu array and check if the value is in the new array
   menu.forEach(item =>{
     if(!selections.includes(item[firstFilterValue])){
@@ -548,3 +507,34 @@ function secondFilterEvent(string, object){
     })
   })
 }
+
+//add eventListener to the add buttons
+let buyArray = []
+const addButton = () => {
+  const buyButtons = document.querySelectorAll(".buy");
+  
+  buyButtons.forEach(buyButton => {
+    buyButton.addEventListener("click", () =>{
+      ObtainDishAndPrice(buyButton)
+    })
+  })
+}
+
+addButton();
+
+//when clicking the add button on a card, find dish and price to add to shopping card
+const ObtainDishAndPrice = (button) => {
+  let idSelector = button.id;
+  const menuBtn = document.getElementById(idSelector);
+  const btnParent = menuBtn.parentElement;
+  
+  const itemPriceElement = btnParent.querySelector(".price");
+  const itemPrice = itemPriceElement.textContent;
+  const dishNameElement = btnParent.querySelector(".dish");
+  const dishName = dishNameElement.textContent;
+
+  const dishPriceArray = [itemPrice, dishName];
+  return dishPriceArray
+
+}
+
