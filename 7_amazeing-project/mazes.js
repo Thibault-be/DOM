@@ -37,3 +37,30 @@ const LEVEL_3 = [
   ["*","T",".","*","*","*","*","*"],
   ["*","*","*","*","*","*","*","*"]
 ]
+
+
+const mainElement = document.querySelector("main");
+
+LEVEL_1.forEach(row =>{
+  newRow = document.createElement("div");
+  newRow.setAttribute("class", "row")
+  row.forEach(tile =>{
+    newTile = document.createElement("div");
+    switch (tile){
+      case "*":{
+        newTile.setAttribute("class", "wall");
+      };
+      case ".":{
+        newTile.setAttribute("class", "free");
+      };
+      case "T":{
+        newTile.setAttribute("class", "treasue");
+      };
+      case "S":{
+        newTile.setAttribute("class", "start");
+      };
+    };
+    newRow.appendChild(newTile);
+  });
+  mainElement.appendChild(newRow);
+});
